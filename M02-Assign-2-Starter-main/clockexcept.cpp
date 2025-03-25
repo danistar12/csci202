@@ -22,7 +22,7 @@ minuteException::minuteException() : msg("The minutes are invalid. Valid values 
     
 }
 
-std::string minuteException::what() 
+std::string minuteException::what()
 {
     return msg;
 }
@@ -33,7 +33,7 @@ secondException::secondException() : msg("The seconds are invalid. Valid values 
     
 }
 
-std::string secondException::what() 
+std::string secondException::what()
 {
     return msg;
 }
