@@ -1,12 +1,22 @@
 {
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/mnt/c/Users/FORTI/OneDrive/Documents/CSCI 202 Assignments/M04 Assignment 1/New Assignment Solution",
+            "binaryPath": "/mnt/c/Users/FORTI/OneDrive/Documents/CSCI 202 Assignments/M04 Assignment 1/New Assignment Solution/a.out",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "c:\\Users\\FORTI\\OneDrive\\Documents\\CSCI 202 Assignments\\M04 Assignment 1\\New Assignment Solution",
+            "binaryPath": "c:\\Users\\FORTI\\OneDrive\\Documents\\CSCI 202 Assignments\\M04 Assignment 1\\New Assignment Solution\\a.out",
+            "binaryArgs": []
+        }
+    ],
     "files.associations": {
-        "*.sqlbook": "sql",
-        "*.ndjson": "jsonl",
-        "*.dbclient-js": "javascript",
+        "iostream": "cpp",
         "array": "cpp",
         "atomic": "cpp",
+        "bit": "cpp",
         "*.tcc": "cpp",
-        "bitset": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
@@ -15,8 +25,6 @@
         "cstdint": "cpp",
         "cstdio": "cpp",
         "cstdlib": "cpp",
-        "cstring": "cpp",
-        "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
@@ -26,22 +34,20 @@
         "algorithm": "cpp",
         "functional": "cpp",
         "iterator": "cpp",
-        "map": "cpp",
         "memory": "cpp",
         "memory_resource": "cpp",
         "numeric": "cpp",
+        "optional": "cpp",
         "random": "cpp",
-        "regex": "cpp",
         "string": "cpp",
+        "string_view": "cpp",
         "system_error": "cpp",
         "tuple": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
         "fstream": "cpp",
         "initializer_list": "cpp",
-        "iomanip": "cpp",
         "iosfwd": "cpp",
-        "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
@@ -50,6 +56,5 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
+    }
 }
