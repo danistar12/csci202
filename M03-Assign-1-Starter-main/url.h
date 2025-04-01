@@ -4,7 +4,18 @@
 #include <fstream>
 #include <iostream>
 #include "HTTPRequest.hpp"
-
-url class declaration goes here
-
+class url {
+    private:
+        std::string urlAddress;
+        std::string fileName;
+    
+    public:
+        // Constructor
+        url(const std::string& url, const std::string& file);
+    
+        // Function to display file contents
+        void displayFile(int lineLimit = -1) const;
+    };
+    
 #endif
+    
