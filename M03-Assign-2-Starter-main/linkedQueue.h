@@ -149,29 +149,4 @@ const linkedQueueType<Type>& linkedQueueType<Type>::operator=(const linkedQueueT
 	
 	return *this;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif
