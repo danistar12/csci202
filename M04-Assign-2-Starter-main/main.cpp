@@ -1,3 +1,8 @@
+/* Program name: Main.cpp
+* Author: Danielle Lloyd    
+* Date last updated: 4/08/2025
+* Purpose: This program tests the unordered linked list class and the product class.
+*/
 #include <iostream>
 #include <fstream>
 #include "unorderedLinkedList.h"
@@ -9,43 +14,73 @@ int compareRating(product &item1, product &item2);
 
 int main()
 {
-    
     unorderedLinkedList<product> listByPrice;
     unorderedLinkedList<product> listByDescription;
-    unorderedLinkedList<product> listByRating; 
+    unorderedLinkedList<product> listByRating;
+    // Read from file
+    std::ifstream inFile("products.txt");
+    if (!inFile)
+    {
+        std::cerr << "Error opening file!" << std::endl;
+        return 1;
+    }
 
-    read the product information from the file
+    std::string description, productNumber;
+    double price, rating;
 
-    std::cout << std::endl;
-    std::cout << "original list for ordering by description: " << std::endl;
-    listByDescription.print(std::cout, "\n"); // prints all of the items in the list and uses \n as the separator character.
-    std::cout << std::endl
-              << std::endl;
-    std::cout << "original list for ordering by Price: " << std::endl;
-    listByPrice.print(std::cout, "\n");
-    std::cout << std::endl
-              << std::endl;
-    std::cout << "original list for ordering by rating" << std::endl;
-    listByRating.print(std::cout, "\n");
-    std::cout << std::endl
-              << std::endl;
+    // Read file line-by-line, ensuring proper stream advancement
+    while (inFile >> price)  
+    {
+        inFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Consume any trailing newline
 
-    merge sort the 3 lists
-    Don't forget to modify unorderedLinkedList.h to add the merge sort functionality.
+        std::getline(inFile, description);  // Read full description (handles spaces)
+        std::getline(inFile, productNumber);  // Read full product number
+        inFile >> rating;  // Read rating
+        inFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ensure new line is removed
 
-    std::cout << "mergeSorted by description product list: " << std::endl;
+        // Create product object and insert it into lists
+        product newProduct(price, description, productNumber, rating);
+        listByPrice.insert(newProduct);
+        listByDescription.insert(newProduct);
+        listByRating.insert(newProduct);
+    }
+
+    inFile.close();
+
+    std::cout << "\nOriginal list for ordering by description:\n";
     listByDescription.print(std::cout, "\n");
-    std::cout << std::endl
-              << std::endl;
-    std::cout << "mergeSorted by price product list: " << std::endl;
+    std::cout << "\nOriginal list for ordering by price:\n";
     listByPrice.print(std::cout, "\n");
-    std::cout << std::endl
-              << std::endl;
-
-    std::cout << "mergeSorted by rating product list: " << std::endl;
+    std::cout << "\nOriginal list for ordering by rating:\n";
     listByRating.print(std::cout, "\n");
-    std::cout << std::endl
-              << std::endl;
+
+    // Perform merge sort
+    listByDescription.mergeSort(compareDescription);
+    listByPrice.mergeSort(comparePrice);
+    listByRating.mergeSort(compareRating);
+
+    std::cout << "\nSorted by description:\n";
+    listByDescription.print(std::cout, "\n");
+    std::cout << "\nSorted by price:\n";
+    listByPrice.print(std::cout, "\n");
+    std::cout << "\nSorted by rating:\n";
+    listByRating.print(std::cout, "\n");
 
     return 0;
+}
+
+// Comparison functions
+int compareDescription(product &item1, product &item2)
+{
+    return item1.getDescription().compare(item2.getDescription());
+}
+
+int comparePrice(product &item1, product &item2)
+{
+    return (item1.getPrice() < item2.getPrice()) ? -1 : (item1.getPrice() > item2.getPrice() ? 1 : 0);
+}
+
+int compareRating(product &item1, product &item2)
+{
+    return (item1.getRating() < item2.getRating()) ? -1 : (item1.getRating() > item2.getRating() ? 1 : 0);
 }
