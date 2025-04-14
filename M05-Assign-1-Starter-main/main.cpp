@@ -9,7 +9,7 @@
 #include "binarySearchTree.h"
 #include "product.h"
 
-//function to load products from a file into the binary search tree
+// Function to load products from a file into the binary search tree
 void loadProducts(binarySearchTree<product> &tree, const std::string &filename)
 {
     std::ifstream file(filename);
@@ -18,14 +18,20 @@ void loadProducts(binarySearchTree<product> &tree, const std::string &filename)
         std::cerr << "Error: Could not open file " << filename << std::endl;
         return;
     }
-    
-    std::string prodNum, prodName;
-    double price;
-    int quantity;
 
-    while (file >> prodNum >> prodName >> price >> quantity)
+    double price, rating;
+    std::string description, prodNum;
+
+    while (file >> price) // Read price
     {
-        product prod(prodNum, prodName, price, quantity);
+        file.ignore(); // Ignore the newline after the price
+        std::getline(file, description); // Read description
+        std::getline(file, prodNum); // Read product number
+        file >> rating; // Read rating
+        file.ignore(); // Ignore the newline after the rating
+
+        // Create a product object and insert it into the tree
+        product prod(price, description, prodNum, rating);
         tree.insert(prod);
     }
 
@@ -38,13 +44,12 @@ int main()
     loadProducts(tree, "products.txt");
 
     int choice;
-    do //opted for a do/while loop to ensure the menu is displayed
+    do
     {
         std::cout << "Menu:\n";
         std::cout << "1. Search for a product\n";
         std::cout << "2. Delete a product\n";
         std::cout << "3. Quit\n";
-        std::cout << "Enter your choice: ";
         std::cin >> choice;
 
         if (choice == 1)
@@ -52,12 +57,20 @@ int main()
             std::string prodNum;
             std::cout << "Enter product number: ";
             std::cin >> prodNum;
-            // Search for the product in the tree
-            product searchProd(prodNum, "", 0.0, 0);
-            if (tree.search(searchProd))
-                std::cout << "Product found: " << searchProd << std::endl;
-            else
-                std::cout << prodNum << " is not found in the tree." << std::endl;
+
+            try
+            {
+                // Create a product object for searching
+                product searchProd(1.0, "", prodNum, 0.0); // Use a valid price (e.g., 1.0)
+                if (tree.search(searchProd))
+                    std::cout << searchProd << std::endl; // Ensure operator<< outputs the correct format
+                else
+                    std::cout << prodNum << " is not found in the tree." << std::endl;
+            }
+            catch (const std::exception &e)
+            {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
         }
         else if (choice == 2)
         {
@@ -65,11 +78,19 @@ int main()
             std::cout << "Enter product number to delete: ";
             std::cin >> prodNum;
 
-            product deleteProd(prodNum, "", 0.0, 0);
-            tree.deleteNode(deleteProd);
-            std::cout << "Product deleted (if it existed)." << std::endl;
+            try
+            {
+                // Create a product object for deletion
+                product deleteProd(1.0, "", prodNum, 0.0); // Use a valid price (e.g., 1.0)
+                tree.deleteNode(deleteProd);
+                std::cout << "Product deleted " << std::endl;
+            }
+            catch (const std::exception &e)
+            {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
         }
-    } while (choice != 3); // Exit the loop if the user chooses to quit
+    } while (choice != 3);
 
     std::cout << "In-order traversal of the tree:\n";
     tree.inorderTraversal();
