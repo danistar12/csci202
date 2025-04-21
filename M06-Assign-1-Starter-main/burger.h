@@ -1,54 +1,38 @@
 #pragma once
 #include <string>
-#include <algorithm>
-#include <iostream>
 #include <sstream>
 #include <iomanip>
-#include <cctype>
+#include "set.h"
 
 const int TOP_NUM = 8;
 
-enum toppingType
-{
-	GRILLONION,
-	RAWONION,
-	TOMATO,
-	LETTUCE,
-	BACON,
-	MUSHROOM,
-	PICKLE,
-	NOTOP
+enum toppingType {
+    GRILLONION,
+    RAWONION,
+    TOMATO,
+    LETTUCE,
+    BACON,
+    MUSHROOM,
+    PICKLE,
+    NOTOP
 };
-const std::string toppingStr[] = {"Grilled Onion",
-								  "Raw Onion",
-								  "Tomato",
-								  "Lettuce",
-								  "Bacon",
-								  "Grilled Mushroom",
-								  "Pickle",
-								  "None"};
-const toppingType toppingList[] = {
-	GRILLONION,
-	RAWONION,
-	TOMATO,
-	LETTUCE,
-	BACON,
-	MUSHROOM,
-	PICKLE, NOTOP};
-class burger
-{
+
+const std::string toppingStr[] = {
+    "Grilled Onion", "Raw Onion", "Tomato", "Lettuce", 
+    "Bacon", "Grilled Mushroom", "Pickle", "None"
+};
+
+class Burger {
 public:
-	burger(int numPatties);
-	std::string getToppings();
-	void addTopping(toppingType);
-	std::string tostring();
-	void setNumPatties(int num);
-	int getNumPatties() const;
+    Burger(int numPatties);
+
+    void addTopping(toppingType topping);
+
+    std::string getToppings() const;
+
+    std::string toString() const;
 
 private:
-	toppingType toppings[7];
-	make a set int numToppings;
-	This should come from the set
-
-		int numPatties;
+    int numPatties;
+    Set<toppingType> toppings;
 };

@@ -1,35 +1,29 @@
 #include "burger.h"
+#include <iostream>
 
-burger::burger(int numPatties)
-{
-	setNumPatties(numPatties);
+Burger::Burger(int numPatties) : numPatties(numPatties) {}
+
+void Burger::addTopping(toppingType topping) {
+    toppings.insert(topping);
 }
 
-std::string burger::getToppings()
-{
-	std::string c;
-	c = toppingStr[toppings[0]];
-	for (int i = 1; i < numToppings; i++)
-	{
-		c += ", " + toppingStr[toppings[i]];
-	}
-	return c;
+std::string Burger::getToppings() const {
+    std::ostringstream oss;
+    Set<toppingType>::Iterator it = toppings.begin();
+    bool first = true;
+    while (it.hasNext()) {
+        if (!first) {
+            oss << ", ";
+        }
+        oss << toppingStr[it.next()];
+        first = false;
+    }
+    return oss.str();
 }
 
-void burger::setNumPatties(int num)
-{
-	if (num > 0)
-		numPatties = num;
-	else
-		std::cout << "The number of patties should be greater than 0." << std::endl;
-}
-
-std::string burger::tostring()
-{
-	std::ostringstream out;
-	out << std::setprecision(2) << std::fixed << std::showpoint;
-	out << "Number of patties: " << numPatties << std::endl;
-	out << "Toppings: " << getToppings();
-
-	return out.str();
+std::string Burger::toString() const {
+    std::ostringstream out;
+    out << "Number of patties: " << numPatties << std::endl;
+    out << "Toppings: " << getToppings();
+    return out.str();
 }

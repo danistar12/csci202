@@ -54,5 +54,6 @@
         "list": "cpp",
         "ratio": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "cmake.sourceDirectory": "C:/Users/DLloy/OneDrive/Desktop/csci202/Library Management System"
 }
