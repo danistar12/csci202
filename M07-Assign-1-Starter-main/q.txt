@@ -1,0 +1,12 @@
+The current implementation of the HashTable class supports both quadratic probing 
+and chaining for collision resolution. It is well-structured, with proper 
+initialization of the table, occupied, and chainTable attributes based on the 
+selected resolution strategy. 
+
+However, the quadratic probing implementation could potentially benefit from 
+additional checks to ensure that the size parameter is valid and that the hash 
+table is not overfilled. The chaining implementation is straightforward and avoids 
+probing altogether, making it more robust for densely populated tables. 
+
+Both methods are functional, but the choice of resolution strategy should depend 
+on the expected table load and hash distribution.
